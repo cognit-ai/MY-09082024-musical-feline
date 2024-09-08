@@ -8,6 +8,11 @@ terraform {
   }
 }
 
+terraform {
+  backend "azurerm" {
+    # The backend values will be provided by the GitHub Actions workflow
+  }
+}
 provider "azurerm" {
   features {}
 }
