@@ -11,15 +11,15 @@ output "app_service_url" {
 }
 
 output "postgresql_server_name" {
-  value = azurerm_postgresql_flexible_server.xwiki_db.name
+  value = azurerm_postgresql_server.xwiki_db.name
 }
 
 output "postgresql_server_fqdn" {
-  value = azurerm_postgresql_flexible_server.xwiki_db.fqdn
+  value = azurerm_postgresql_server.xwiki_db.fqdn
 }
 
 output "postgresql_database_name" {
-  value = azurerm_postgresql_flexible_server_database.xwiki_db.name
+  value = azurerm_postgresql_database.xwiki_db.name
 }
 
 output "storage_account_name" {

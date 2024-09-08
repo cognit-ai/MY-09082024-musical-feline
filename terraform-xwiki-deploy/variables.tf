@@ -29,7 +29,13 @@ variable "app_service_plan_size" {
 variable "db_version" {
   description = "The version of the PostgreSQL database"
   type        = string
-  default     = "13"
+  default     = "11"
+}
+
+variable "ssl_enforcement_enabled" {
+  description = "Specifies if SSL should be enforced on connections"
+  type        = bool
+  default     = true
 }
 
 variable "db_admin_username" {
@@ -41,12 +47,6 @@ variable "db_admin_password" {
   description = "Password for the database administrator"
   type        = string
   sensitive   = true
-}
-
-variable "db_sku_name" {
-  description = "The SKU name for the PostgreSQL Flexible Server"
-  type        = string
-  default     = "B_Standard_B1ms"
 }
 
 variable "storage_mb" {
