@@ -1,6 +1,5 @@
 location                         = "eastus"
 environment                      = "prod"
-resource_group_name              = "xwiki-rg"
 app_service_plan_tier            = "Basic"
 app_service_plan_size            = "B1"
 db_version                       = "11"
