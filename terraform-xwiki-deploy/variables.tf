@@ -52,7 +52,7 @@ variable "db_admin_password" {
 variable "storage_mb" {
   description = "Allocated storage for PostgreSQL in MB"
   type        = number
-  default     = 5120  # Minimum 5GB for Azure PostgreSQL Flexible Server
+  default     = 5120 # Minimum 5GB for Azure PostgreSQL Flexible Server
 }
 
 variable "backup_retention_days" {
@@ -70,7 +70,7 @@ variable "storage_account_tier" {
 variable "storage_account_replication_type" {
   description = "The replication type of the storage account"
   type        = string
-  default     = "LRS"  # Changed to LRS for cost efficiency
+  default     = "LRS" # Changed to LRS for cost efficiency
 }
 
 variable "backup_container_name" {
