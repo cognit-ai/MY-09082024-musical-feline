@@ -15,17 +15,12 @@ variable "github_token" {
 
 variable "github_organisation_target" {
   type    = string
-  default = "my_organisation"
+  default = "cognit-ai"
 }
 
-variable "github_organisation_template" {
+variable "github_repository_name" {
   type    = string
-  default = "Azure-Samples"
-}
-
-variable "github_repository_template" {
-  type    = string
-  default = "github-terraform-oidc-ci-cd"
+  default = "cognit-xwiki"
 }
 
 variable "environments" {
