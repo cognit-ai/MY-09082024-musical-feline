@@ -1,0 +1,13 @@
+location                        = "eastus"
+environment                     = "dev"
+app_service_plan_tier           = "Basic"
+app_service_plan_size           = "B1"
+db_version                      = "13"
+db_admin_username               = "xwikiadmin"
+db_sku_name                     = "B_Standard_B1ms"
+storage_mb                      = 5120 # Minimum 5GB for Azure PostgreSQL Flexible Server
+backup_retention_days           = 7
+storage_account_tier            = "Standard"
+storage_account_replication_type = "LRS"
+backup_container_name           = "xwiki-backups"
+db_name                         = "xwikidb"
