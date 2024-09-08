@@ -150,7 +150,7 @@ jobs:
 
     deploy-to-prod:
         if: github.event_name != 'pull_request'
-        needs: deploy-to-test
+        # needs: deploy-to-test
         defaults:
             run:
                 working-directory: terraform-example-deploy
