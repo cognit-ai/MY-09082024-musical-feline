@@ -24,7 +24,7 @@ locals {
 
 # Resource Group
 resource "azurerm_resource_group" "xwiki_rg" {
-  name     = "${local.resource_prefix}-rg"
+  name     = var.resource_group_name
   location = var.location
   tags     = local.common_tags
 }

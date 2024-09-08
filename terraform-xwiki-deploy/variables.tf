@@ -4,6 +4,11 @@ variable "location" {
   default     = "eastus"
 }
 
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+}
+
 variable "environment" {
   description = "The environment for the resources (e.g., dev, test, prod)"
   type        = string
