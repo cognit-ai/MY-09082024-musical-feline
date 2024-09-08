@@ -38,17 +38,15 @@ locals {
 }
 
 # Resource Group
-resource "azurerm_resource_group" "xwiki_rg" {
+data "azurerm_resource_group" "xwiki_rg" {
   name     = var.resource_group_name
-  location = var.location
-  tags     = local.common_tags
 }
 
 # App Service Plan
 resource "azurerm_app_service_plan" "xwiki_plan" {
   name                = "${local.resource_prefix}-asp"
-  location            = azurerm_resource_group.xwiki_rg.location
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  location            = data.azurerm_resource_group.xwiki_rg.location
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
   kind                = "Linux"
   reserved            = true
 
@@ -63,8 +61,8 @@ resource "azurerm_app_service_plan" "xwiki_plan" {
 # App Service
 resource "azurerm_app_service" "xwiki_app" {
   name                = "${local.resource_prefix}-app"
-  location            = azurerm_resource_group.xwiki_rg.location
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  location            = data.azurerm_resource_group.xwiki_rg.location
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
   app_service_plan_id = azurerm_app_service_plan.xwiki_plan.id
 
   site_config {
@@ -93,8 +91,8 @@ resource "azurerm_app_service" "xwiki_app" {
 
 resource "azurerm_postgresql_server" "xwiki_db" {
   name                = "${local.resource_prefix}-db"
-  location            = azurerm_resource_group.xwiki_rg.location
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  location            = data.azurerm_resource_group.xwiki_rg.location
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
 
   sku_name = "B_Gen5_1"
 
@@ -113,7 +111,7 @@ resource "azurerm_postgresql_server" "xwiki_db" {
 # PostgreSQL Database
 resource "azurerm_postgresql_database" "xwiki_db" {
   name                = var.db_name
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
   server_name         = azurerm_postgresql_server.xwiki_db.name
   charset             = "UTF8"
   collation           = "English_United States.1252"
@@ -123,8 +121,8 @@ resource "azurerm_postgresql_database" "xwiki_db" {
 # Storage Account for XWiki file backups
 resource "azurerm_storage_account" "xwiki_storage" {
   name                     = lower(replace("${local.resource_prefix}st", "-", ""))
-  resource_group_name      = azurerm_resource_group.xwiki_rg.name
-  location                 = azurerm_resource_group.xwiki_rg.location
+  resource_group_name      = data.azurerm_resource_group.xwiki_rg.name
+  location                 = data.azurerm_resource_group.xwiki_rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
 
@@ -148,8 +146,8 @@ resource "azurerm_storage_container" "xwiki_backups" {
 # Network Security Group
 resource "azurerm_network_security_group" "xwiki_nsg" {
   name                = "${local.resource_prefix}-nsg"
-  location            = azurerm_resource_group.xwiki_rg.location
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  location            = data.azurerm_resource_group.xwiki_rg.location
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
 
   security_rule {
     name                       = "AllowHTTPSInbound"
@@ -169,8 +167,8 @@ resource "azurerm_network_security_group" "xwiki_nsg" {
 # Application Insights
 resource "azurerm_application_insights" "xwiki_insights" {
   name                = "${local.resource_prefix}-insights"
-  location            = azurerm_resource_group.xwiki_rg.location
-  resource_group_name = azurerm_resource_group.xwiki_rg.name
+  location            = data.azurerm_resource_group.xwiki_rg.location
+  resource_group_name = data.azurerm_resource_group.xwiki_rg.name
   application_type    = "web"
 
   tags = local.common_tags
