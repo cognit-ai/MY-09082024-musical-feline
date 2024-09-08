@@ -9,12 +9,11 @@ permissions:
 
 jobs:
     analysis:
-        if: github.event_name == 'pull_request'
         defaults:
             run:
-                working-directory: terraform-example-deploy
+                working-directory: terraform-xwiki-deploy
         name: Analyse the Terraform
-        environment: dev
+        environment: prod
         runs-on: ubuntu-latest
         env:
             ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
