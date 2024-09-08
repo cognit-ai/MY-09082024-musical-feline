@@ -175,21 +175,3 @@ resource "azurerm_application_insights" "xwiki_insights" {
 
   tags = local.common_tags
 }
-
-# Outputs
-output "app_service_url" {
-  value = "https://${azurerm_app_service.xwiki_app.default_site_hostname}"
-}
-
-output "postgresql_server_fqdn" {
-  value = azurerm_postgresql_flexible_server.xwiki_db.fqdn
-}
-
-output "storage_account_name" {
-  value = azurerm_storage_account.xwiki_storage.name
-}
-
-output "application_insights_instrumentation_key" {
-  value     = azurerm_application_insights.xwiki_insights.instrumentation_key
-  sensitive = true
-}
